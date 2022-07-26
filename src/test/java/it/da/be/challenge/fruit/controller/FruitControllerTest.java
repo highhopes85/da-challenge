@@ -18,11 +18,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import it.da.be.challenge.fruit.dto.FruitProjection;
+import it.da.be.challenge.fruit.dto.NutritionsDifferencesProjection;
 import it.da.be.challenge.fruit.service.FruitService;
 
 @ExtendWith(MockitoExtension.class)
 class FruitControllerTest {
 
+	private static final String TEST_NAME = "test name";
 	private static final int TEST_MAX_CALORIES = 200;
 	@InjectMocks
 	private FruitController controller;
@@ -34,7 +36,7 @@ class FruitControllerTest {
 		controller.getAllByMaxCalories(TEST_MAX_CALORIES);
 		verify(serviceMock, times(1)).getAllByMaxCalories(TEST_MAX_CALORIES);
 	}
-	
+
 	@Test
 	void testGetAllByMaxCaloriesShouldReturnProperResponse() throws Exception {
 		List<FruitProjection> fruitDtoMockList = Arrays.asList(mock(FruitProjection.class));
@@ -45,5 +47,22 @@ class FruitControllerTest {
 		assertNotNull(body);
 		assertEquals(fruitDtoMockList, body);
 	}
- 
+
+	@Test
+	void testGetNutritionsDifferencesShouldInvokeService() throws Exception {
+		controller.getNutritionsDifferences(TEST_NAME + 1, TEST_NAME + 2);
+		verify(serviceMock, times(1)).getNutritionsDifferences(TEST_NAME + 1, TEST_NAME + 2);
+	}
+
+	@Test
+	void testGetNutritionsDifferencesShouldReturnProperResponse() throws Exception {
+		NutritionsDifferencesProjection nutritionsDifferencesMock = mock(NutritionsDifferencesProjection.class);
+		when(serviceMock.getNutritionsDifferences(TEST_NAME+1, TEST_NAME+2)).thenReturn(nutritionsDifferencesMock);
+		ResponseEntity<NutritionsDifferencesProjection> response = controller
+				.getNutritionsDifferences(TEST_NAME + 1, TEST_NAME + 2);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(nutritionsDifferencesMock, response.getBody());
+		
+	}
+
 }

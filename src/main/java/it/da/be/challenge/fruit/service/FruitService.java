@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.da.be.challenge.fruit.dto.FruitProjection;
+import it.da.be.challenge.fruit.dto.NutritionsDifferencesProjection;
 import it.da.be.challenge.fruit.repository.FruitRepository;
 
 @Service
@@ -23,6 +24,13 @@ public class FruitService {
 		List<FruitProjection> dtoList = repository.findByNutritionsCaloriesLessThanEqual(maxCalories);
 		LOGGER.info("getAllByMaxCalories returning {} results", dtoList.size());
 		return dtoList;
+	}
+
+	public NutritionsDifferencesProjection getNutritionsDifferences(String fruit1Name, String fruit2Name) {
+		LOGGER.info("getNutritionsDifferences invoked with parameters {}, {}", fruit1Name, fruit2Name);
+		NutritionsDifferencesProjection nutritionsDifferences = repository.findNutritionsDifferences(fruit1Name, fruit2Name);
+		LOGGER.info("getNutritionsDifferences returning result");
+		return nutritionsDifferences;
 	}
 
 }

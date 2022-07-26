@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.da.be.challenge.fruit.dto.NutritionsDifferencesProjection;
+import it.da.be.challenge.fruit.constants.PathConstants;
 import it.da.be.challenge.fruit.dto.FruitProjection;
 import it.da.be.challenge.fruit.service.FruitService;
 
 @RestController
-@RequestMapping("fruits")
+@RequestMapping(PathConstants.FRUITS)
 public class FruitController {
 
 	@Autowired
@@ -25,7 +26,7 @@ public class FruitController {
 		return ResponseEntity.ok(service.getAllByMaxCalories(maxCalories));
 	}
 
-	@GetMapping("/nutritions/differences")
+	@GetMapping(PathConstants.NUTRITIONS_DIFFERENCES)
 	public ResponseEntity<NutritionsDifferencesProjection> getNutritionsDifferences(String fruit1Name, String fruit2Name) {
 		return ResponseEntity.ok(service.getNutritionsDifferences(fruit1Name, fruit2Name));
 	}

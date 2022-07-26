@@ -32,4 +32,9 @@ public class FruitController {
 		return ResponseEntity.ok(service.getNutritionsDifferences(fruit1Name, fruit2Name));
 	}
 
+	@GetMapping("/nutritions/average")
+	public ResponseEntity<NutritionsInfoProjection> getFamilyNutritionsAverage(@RequestParam(required = true) String family) {
+		return ResponseEntity.ok(service.getFamilyNutritionsAverage(family));
+	}
+
 }

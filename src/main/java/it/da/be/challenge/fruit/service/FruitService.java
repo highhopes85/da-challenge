@@ -33,4 +33,11 @@ public class FruitService {
 		return nutritionsDifferences;
 	}
 
+	public NutritionsInfoProjection getFamilyNutritionsAverage(String family) {
+		LOGGER.info("getFamilyNutritionsAverage invoked with parameter {}", family);
+		NutritionsInfoProjection nutritionsAverage = repository.findFamilyNutritionsAverage(family);
+		LOGGER.info("getFamilyNutritionsAverage returning result");
+		return nutritionsAverage;
+	}
+
 }

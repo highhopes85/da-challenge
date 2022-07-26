@@ -22,6 +22,7 @@ import it.da.be.challenge.fruit.repository.FruitRepository;
 @ExtendWith(MockitoExtension.class)
 class FruitServiceTest {
 
+	private static final String TEST_FAMILY = "test family";
 	private static final String TEST_NAME = "test name";
 	private static final int TEST_MAX_CALORIES = 150;
 	@InjectMocks
@@ -50,11 +51,25 @@ class FruitServiceTest {
 	}
 	
 	@Test
-	void testGetNutritionDifferencesReturnProperResult() throws Exception {
+	void testGetNutritionDifferencesShouldReturnProperResult() throws Exception {
 		NutritionsInfoProjection nutritionsDifferencesMock = mock(NutritionsInfoProjection.class);
 		when(repositoryMock.findNutritionsDifferences(TEST_NAME+1, TEST_NAME+2)).thenReturn(nutritionsDifferencesMock);
 		NutritionsInfoProjection nutritionsDifferences = service.getNutritionsDifferences(TEST_NAME+1, TEST_NAME+2);
 		assertEquals(nutritionsDifferencesMock, nutritionsDifferences);
+	}
+	
+	@Test
+	void testGetFamilyNutritionsAverageShouldInvokeRepository() throws Exception {
+		service.getFamilyNutritionsAverage(TEST_FAMILY);
+		verify(repositoryMock, times(1)).findFamilyNutritionsAverage(TEST_FAMILY);
+	}
+	
+	@Test
+	void testGetFamilyNutritionsAverageShouldReturnProperResult() throws Exception {
+		NutritionsInfoProjection nutritionsAverageMock = mock(NutritionsInfoProjection.class);
+		when(repositoryMock.findFamilyNutritionsAverage(TEST_FAMILY)).thenReturn(nutritionsAverageMock);
+		NutritionsInfoProjection nutritionsDifferences = service.getFamilyNutritionsAverage(TEST_FAMILY);
+		assertEquals(nutritionsAverageMock, nutritionsDifferences);
 	}
 
 }

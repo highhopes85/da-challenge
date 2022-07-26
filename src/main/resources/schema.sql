@@ -13,7 +13,7 @@ CREATE TABLE fruit_nutritions (
     carbohydrates NUMERIC(5,2) NOT NULL,
     protein NUMERIC(5,2) NOT NULL,
     fat NUMERIC(5,2) NOT NULL,
-    calories INTEGER NOT NULL,
+    calories NUMERIC(5,2) NOT NULL,
     sugar NUMERIC(5,2) NOT NULL,
     PRIMARY KEY (id)
 );

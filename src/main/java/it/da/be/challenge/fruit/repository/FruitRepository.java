@@ -26,4 +26,17 @@ public interface FruitRepository extends CrudRepository<Fruit, Long>{
 			nativeQuery =true)
 	NutritionsInfoProjection findNutritionsDifferences(String fruit1Name, String fruit2Name);
 
+	@Query(value="select"
+			+ " avg(n.carbohydrates) carbohydrates,"
+			+ " avg(n.protein) protein,"
+			+ " avg(n.fat) fat,"
+			+ " avg(n.calories) calories,"
+			+ " avg(n.sugar) sugar"
+			+ " from fruit f"
+			+ " join fruit_nutritions n on n.id = f.nutritions_id"
+			+ " where f.family = :family"
+			+ " group by f.family",
+			nativeQuery =true)
+	NutritionsInfoProjection findFamilyNutritionsAverage(String family);
+
 }

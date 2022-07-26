@@ -25,6 +25,7 @@ import it.da.be.challenge.fruit.service.FruitService;
 @ExtendWith(MockitoExtension.class)
 class FruitControllerTest {
 
+	private static final String TEST_FAMILY = "test family";
 	private static final String TEST_NAME = "test name";
 	private static final int TEST_MAX_CALORIES = 200;
 	@InjectMocks
@@ -63,6 +64,23 @@ class FruitControllerTest {
 				.getNutritionsDifferences(TEST_NAME + 1, TEST_NAME + 2);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(nutritionsDifferencesMock, response.getBody());
+		
+	}
+	
+	@Test
+	void testGetFamilyNutritionsAverageShouldInvokeService() throws Exception {
+		controller.getFamilyNutritionsAverage(TEST_FAMILY);
+		verify(serviceMock, times(1)).getFamilyNutritionsAverage(TEST_FAMILY);
+	}
+	
+	@Test
+	void testGetFamilyNutritionsAverageShouldReturnProperResponse() throws Exception {
+		NutritionsInfoProjection nutritionsAverageMock = mock(NutritionsInfoProjection.class);
+		when(serviceMock.getFamilyNutritionsAverage(TEST_FAMILY)).thenReturn(nutritionsAverageMock);
+		ResponseEntity<NutritionsInfoProjection> response = controller
+				.getFamilyNutritionsAverage(TEST_FAMILY);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals(nutritionsAverageMock, response.getBody());
 		
 	}
 

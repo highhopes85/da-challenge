@@ -18,7 +18,7 @@ public class FruitNutritions {
 	@Column(nullable = false)
     private double fat;
 	@Column(nullable = false)
-    private int calories;
+    private double calories;
 	@Column(nullable = false)
     private double sugar;
 	
@@ -46,10 +46,10 @@ public class FruitNutritions {
 	public void setFat(double fat) {
 		this.fat = fat;
 	}
-	public int getCalories() {
+	public double getCalories() {
 		return calories;
 	}
-	public void setCalories(int calories) {
+	public void setCalories(double calories) {
 		this.calories = calories;
 	}
 	public double getSugar() {

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +16,7 @@ import it.da.be.challenge.fruit.entity.Fruit;
 import it.da.be.challenge.fruit.entity.FruitNutritions;
 
 @SpringBootTest
+@Transactional
 @ActiveProfiles("junit")
 class FruitRepositoryTest {
 
@@ -30,15 +33,27 @@ class FruitRepositoryTest {
 	private FruitRepository repository;
 
 	@Test
-	void testFindNutritionsDifferencesComputeNutritionsDifferences() {
-		repository.saveAll(Arrays.asList(givenFruit(1), givenFruit(20), givenFruit(30)));
+	void testFindNutritionsDifferencesShouldComputeNutritionsDifferences() {
+		repository.saveAll(
+				Arrays.asList(givenFruit(1, TEST_FAMILY), givenFruit(20, TEST_FAMILY), givenFruit(30, TEST_FAMILY)));
 		assertNutritionDifferences(29, repository.findNutritionsDifferences(TEST_NAME + 30, TEST_NAME + 1));
 		assertNutritionDifferences(19, repository.findNutritionsDifferences(TEST_NAME + 20, TEST_NAME + 1));
 		assertNutritionDifferences(10, repository.findNutritionsDifferences(TEST_NAME + 30, TEST_NAME + 20));
 	}
 
-	private void assertNutritionDifferences(int expectedDifference,
-			NutritionsInfoProjection nutritionsDifferences) {
+	@Test
+	void testFindNutritionsDifferencesShouldComputeNutritionsAverage() {
+		repository.saveAll(Arrays.asList(givenFruit(1, TEST_FAMILY), givenFruit(20, TEST_FAMILY + 2),
+				givenFruit(30, TEST_FAMILY)));
+		NutritionsInfoProjection familyNutritionsAverage = repository.findFamilyNutritionsAverage(TEST_FAMILY);
+		assertEquals(26.5, familyNutritionsAverage.getSugar());
+		assertEquals(28.5, familyNutritionsAverage.getCalories());
+		assertEquals(71, familyNutritionsAverage.getCarbohydrates());
+		assertEquals(48.5, familyNutritionsAverage.getFat());
+		assertEquals(38, familyNutritionsAverage.getProtein());
+	}
+
+	private void assertNutritionDifferences(int expectedDifference, NutritionsInfoProjection nutritionsDifferences) {
 		assertEquals(expectedDifference, nutritionsDifferences.getSugar());
 		assertEquals(expectedDifference, nutritionsDifferences.getCalories());
 		assertEquals(expectedDifference, nutritionsDifferences.getCarbohydrates());
@@ -46,9 +61,9 @@ class FruitRepositoryTest {
 		assertEquals(expectedDifference, nutritionsDifferences.getProtein());
 	}
 
-	private Fruit givenFruit(int index) {
+	private Fruit givenFruit(int index, String family) {
 		Fruit fruit = new Fruit();
-		fruit.setFamily(TEST_FAMILY + index);
+		fruit.setFamily(family);
 		fruit.setGenus(TEST_GENUS + index);
 		fruit.setName(TEST_NAME + index);
 		fruit.setOrder(TEST_ORDER + index);

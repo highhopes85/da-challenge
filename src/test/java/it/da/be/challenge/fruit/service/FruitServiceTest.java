@@ -1,6 +1,6 @@
 package it.da.be.challenge.fruit.service;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -16,7 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import it.da.be.challenge.fruit.dto.FruitProjection;
-import it.da.be.challenge.fruit.dto.NutritionsDifferencesProjection;
+import it.da.be.challenge.fruit.dto.NutritionsInfoProjection;
 import it.da.be.challenge.fruit.repository.FruitRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -51,9 +51,9 @@ class FruitServiceTest {
 	
 	@Test
 	void testGetNutritionDifferencesReturnProperResult() throws Exception {
-		NutritionsDifferencesProjection nutritionsDifferencesMock = mock(NutritionsDifferencesProjection.class);
+		NutritionsInfoProjection nutritionsDifferencesMock = mock(NutritionsInfoProjection.class);
 		when(repositoryMock.findNutritionsDifferences(TEST_NAME+1, TEST_NAME+2)).thenReturn(nutritionsDifferencesMock);
-		NutritionsDifferencesProjection nutritionsDifferences = service.getNutritionsDifferences(TEST_NAME+1, TEST_NAME+2);
+		NutritionsInfoProjection nutritionsDifferences = service.getNutritionsDifferences(TEST_NAME+1, TEST_NAME+2);
 		assertEquals(nutritionsDifferencesMock, nutritionsDifferences);
 	}
 

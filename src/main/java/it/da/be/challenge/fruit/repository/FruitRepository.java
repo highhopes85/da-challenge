@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import it.da.be.challenge.fruit.dto.NutritionsDifferencesProjection;
 import it.da.be.challenge.fruit.dto.FruitProjection;
+import it.da.be.challenge.fruit.dto.NutritionsInfoProjection;
 import it.da.be.challenge.fruit.entity.Fruit;
 
 public interface FruitRepository extends CrudRepository<Fruit, Long>{
@@ -24,6 +24,6 @@ public interface FruitRepository extends CrudRepository<Fruit, Long>{
 			+ " join fruit_nutritions n1 on n1.id = f1.nutritions_id"
 			+ " join fruit_nutritions n2 on n2.id = f2.nutritions_id",
 			nativeQuery =true)
-	NutritionsDifferencesProjection findNutritionsDifferences(String fruit1Name, String fruit2Name);
+	NutritionsInfoProjection findNutritionsDifferences(String fruit1Name, String fruit2Name);
 
 }

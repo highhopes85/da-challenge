@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import it.da.be.challenge.fruit.dto.NutritionsDifferencesProjection;
+import it.da.be.challenge.fruit.dto.NutritionsInfoProjection;
 import it.da.be.challenge.fruit.entity.Fruit;
 import it.da.be.challenge.fruit.entity.FruitNutritions;
 
@@ -38,7 +38,7 @@ class FruitRepositoryTest {
 	}
 
 	private void assertNutritionDifferences(int expectedDifference,
-			NutritionsDifferencesProjection nutritionsDifferences) {
+			NutritionsInfoProjection nutritionsDifferences) {
 		assertEquals(expectedDifference, nutritionsDifferences.getSugar());
 		assertEquals(expectedDifference, nutritionsDifferences.getCalories());
 		assertEquals(expectedDifference, nutritionsDifferences.getCarbohydrates());

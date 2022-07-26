@@ -1,6 +1,6 @@
 package it.da.be.challenge.fruit.dto;
 
-public interface FruitNutritionsProjection {
+public interface NutritionsInfoProjection {
 	
 	double getCarbohydrates();
     double getProtein();

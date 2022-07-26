@@ -1,6 +1,7 @@
 package it.da.be.challenge.fruit.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -18,7 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import it.da.be.challenge.fruit.dto.FruitProjection;
-import it.da.be.challenge.fruit.dto.NutritionsDifferencesProjection;
+import it.da.be.challenge.fruit.dto.NutritionsInfoProjection;
 import it.da.be.challenge.fruit.service.FruitService;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,9 +57,9 @@ class FruitControllerTest {
 
 	@Test
 	void testGetNutritionsDifferencesShouldReturnProperResponse() throws Exception {
-		NutritionsDifferencesProjection nutritionsDifferencesMock = mock(NutritionsDifferencesProjection.class);
+		NutritionsInfoProjection nutritionsDifferencesMock = mock(NutritionsInfoProjection.class);
 		when(serviceMock.getNutritionsDifferences(TEST_NAME+1, TEST_NAME+2)).thenReturn(nutritionsDifferencesMock);
-		ResponseEntity<NutritionsDifferencesProjection> response = controller
+		ResponseEntity<NutritionsInfoProjection> response = controller
 				.getNutritionsDifferences(TEST_NAME + 1, TEST_NAME + 2);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 		assertEquals(nutritionsDifferencesMock, response.getBody());

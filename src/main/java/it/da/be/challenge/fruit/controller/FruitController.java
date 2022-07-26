@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.da.be.challenge.fruit.dto.NutritionsDifferencesProjection;
 import it.da.be.challenge.fruit.constants.PathConstants;
 import it.da.be.challenge.fruit.dto.FruitProjection;
+import it.da.be.challenge.fruit.dto.NutritionsInfoProjection;
 import it.da.be.challenge.fruit.service.FruitService;
 
 @RestController
@@ -27,7 +27,8 @@ public class FruitController {
 	}
 
 	@GetMapping(PathConstants.NUTRITIONS_DIFFERENCES)
-	public ResponseEntity<NutritionsDifferencesProjection> getNutritionsDifferences(String fruit1Name, String fruit2Name) {
+	public ResponseEntity<NutritionsInfoProjection> getNutritionsDifferences(
+			@RequestParam(required = true) String fruit1Name, @RequestParam(required = true) String fruit2Name) {
 		return ResponseEntity.ok(service.getNutritionsDifferences(fruit1Name, fruit2Name));
 	}
 

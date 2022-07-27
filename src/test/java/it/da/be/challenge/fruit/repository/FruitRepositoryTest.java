@@ -24,7 +24,7 @@ class FruitRepositoryTest {
 	private static final double TEST_PROTEIN = 22.5;
 	private static final double TEST_FAT = 33.0;
 	private static final double TEST_CARBOHYDRATES = 55.5;
-	private static final int TEST_CALORIES = 13;
+	private static final double TEST_CALORIES = 13;
 	private static final String TEST_ORDER = "test order";
 	private static final String TEST_GENUS = "test genus";
 	private static final String TEST_NAME = "test name";

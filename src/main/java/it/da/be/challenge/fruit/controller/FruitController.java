@@ -22,7 +22,7 @@ public class FruitController {
 	private FruitService service;
 
 	@GetMapping
-	public ResponseEntity<List<FruitProjection>> getAllByMaxCalories(@RequestParam(required = true) int maxCalories) {
+	public ResponseEntity<List<FruitProjection>> getAllByMaxCalories(@RequestParam(required = true) double maxCalories) {
 		return ResponseEntity.ok(service.getAllByMaxCalories(maxCalories));
 	}
 

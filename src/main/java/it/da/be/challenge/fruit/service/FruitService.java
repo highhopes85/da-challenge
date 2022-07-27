@@ -19,7 +19,7 @@ public class FruitService {
 	@Autowired
 	private FruitRepository repository;
 	
-	public List<FruitProjection> getAllByMaxCalories(int maxCalories) {
+	public List<FruitProjection> getAllByMaxCalories(double maxCalories) {
 		LOGGER.info("getAllByMaxCalories invoked with parameter {}", maxCalories);
 		List<FruitProjection> dtoList = repository.findByNutritionsCaloriesLessThanEqual(maxCalories);
 		LOGGER.info("getAllByMaxCalories returning {} results", dtoList.size());

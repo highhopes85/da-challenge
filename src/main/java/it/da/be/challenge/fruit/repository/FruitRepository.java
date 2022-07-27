@@ -11,7 +11,7 @@ import it.da.be.challenge.fruit.entity.Fruit;
 
 public interface FruitRepository extends CrudRepository<Fruit, Long>{
 
-	List<FruitProjection> findByNutritionsCaloriesLessThanEqual(int maxCalories);
+	List<FruitProjection> findByNutritionsCaloriesLessThanEqual(double maxCalories);
 	
 	@Query(value="select"
 			+ " (n1.carbohydrates-n2.carbohydrates) carbohydrates, "

@@ -1,5 +1,5 @@
 # DA Challenge - Fruit
-L'applicazione da-challenge espone i seguenti endpoint rest:
+L'applicazione fruit espone i seguenti endpoint rest:
 - `/api/fruits?maxCalories=:maxCalories` (Data una quantità massima di calorie restituisce la lista di tutti i frutti con calorie minori)
 - `/api/fruits/nutritions/differences?fruit1Name=:fruit1Name&fruit2Name=:fruit2Name` (Dati due nomi di frutti restituisce la differenza di tutti i valori nutrizionali)
 - `/api/fruits/nutritions/average?family=:family` (Dato un nome famiglia restituisce la media di tutti i valori nutrizionali dei frutti appartenenti alla famiglia)
@@ -16,6 +16,6 @@ Per poter eseguire l'applicazione è sufficiente:
 
 ## Esempi per test API in locale
 
-- [http://localhost:8080/api/fruits?maxCalories=40]
-- [http://localhost:8080/api/fruits/nutritions/differences?fruit1Name=Apple&fruit2Name=Banana]
-- [http://localhost:8080/api/fruits/nutritions/average?family=Rosaceae]
+- [http://localhost:8080/api/fruits?maxCalories=40]()
+- [http://localhost:8080/api/fruits/nutritions/differences?fruit1Name=Apple&fruit2Name=Banana]()
+- [http://localhost:8080/api/fruits/nutritions/average?family=Rosaceae]()
